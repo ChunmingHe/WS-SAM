@@ -14,6 +14,28 @@
 > </p>
 ---
 
+### 1. Prerequisites
+
+> Note that FEDER is only tested on Ubuntu OS with the following environments.
+
+- Creating a virtual environment in the terminal: `conda create -n FEDER python=3.8`.
+- Installing necessary packages: `pip install -r requirements.txt`
+
+### 2. Downloading Training and Testing Datasets
+
+- Download the [training pseudo mask](https://pan.baidu.com/s/1OXQdRLhP3kond_vWWQLVIQ?pwd=6666), where the extraction code is 6666. We provide all pseudo masks to ensure completeness. Feel free to filter out those low-quality masks in the training phase.
+
+- You can find useful training and testing datasets in [this repository](https://github.com/ChunmingHe/awesome-concealed-object-segmentation).
+
+
+
+## Related Works
+[Strategic preys make acute predators: Enhancing camouflaged object detectors by generating camouflaged objects](https://github.com/ChunmingHe/Camouflageator), ICLR 2024.
+
+[Camouflaged object detection with feature decomposition and edge reconstruction](https://github.com/ChunmingHe/FEDER), NeurIPS 2023.
+
+[Concealed Object Detection](https://github.com/GewelsJI/SINet-V2), TPAMI 2022.
+
 
 ## 📎 Citation
 
@@ -27,6 +49,8 @@ If you find the code helpful in your research or work, please cite the following
   year={2023}
 }
 ```
+## Concat
+If you have any questions, please feel free to contact me via email at chunminghe19990224@gmail.com or hcm21@mails.tsinghua.edu.cn.
 
 ## 💡 Acknowledgements
 The codes are based on [FEDER](https://github.com/ChunmingHe/FEDER) and [SINet V2](https://github.com/GewelsJI/SINet-V2). Please also follow their licenses. Thanks for the awesome work.
