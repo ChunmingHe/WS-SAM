@@ -16,7 +16,7 @@
 
 ### 1. Prerequisites
 
-> Note that FEDER is only tested on Ubuntu OS with the following environments.
+> Note that WS-SAM is only tested on Ubuntu OS with the following environments.
 
 - Creating a virtual environment in the terminal: `conda create -n FEDER python=3.8`.
 - Installing necessary packages: `pip install -r requirements.txt`
