@@ -1,16 +1,16 @@
 # WS-SAM
 **Weakly-Supervised Concealed Object Segmentation with SAM-based Pseudo Labeling and Multi-scale Feature Grouping**, NeurIPS 2023
 
-[[Paper](https://proceedings.neurips.cc/paper_files/paper/2023/file/61aa557643ae8709b6a4f41140b2234a-Paper-Conference.pdf)] [[Supplementary material](https://proceedings.neurips.cc/paper_files/paper/2023/file/61aa557643ae8709b6a4f41140b2234a-Supplemental-Conference.pdf)][Results] [Pretrained models]
+[[Paper](https://proceedings.neurips.cc/paper_files/paper/2023/file/61aa557643ae8709b6a4f41140b2234a-Paper-Conference.pdf)] [[Supplementary material](https://proceedings.neurips.cc/paper_files/paper/2023/file/61aa557643ae8709b6a4f41140b2234a-Supplemental-Conference.pdf)][[Results](https://pan.baidu.com/s/1osvAanBj8cfWx836zVyfrw?pwd=6666)] [[Pretrained models](https://pan.baidu.com/s/1WkRpCccqGNXK647EUDNNJQ?pwd=6666)]
 
 #### Authors
 [Chunming He^](https://chunminghe.github.io/), [Kai Li^](http://kailigo.github.io/), [Yachao Zhang](https://yachao-zhang.github.io/), [Guoxia Xu](https://scholar.google.com/citations?user=tfwlUZkAAAAJ&hl=en), [Longxiang Tang](https://scholar.google.com/citations?user=3oMQsq8AAAAJ&hl=en), [Yulun Zhang](https://yulunzhang.com/), [Zhenhua Guo](https://scholar.google.com/citations?user=dbR6bD0AAAAJ&hl=en), [Xiu Li*](https://scholar.google.com/citations?user=Xrh1OIUAAAAJ&hl=en)
 
 ---
-> **Abstract:** *Camouflaged object detection (COD) aims to address the tough issue of identifying camouflaged objects visually blended into the surrounding backgrounds. COD is a challenging task due to the intrinsic similarity of camouflaged objects with the background, as well as their ambiguous boundaries. Existing approaches to this problem have developed various techniques to mimic the human visual system. Albeit effective in many cases, these methods still struggle when camouflaged objects are so deceptive to the vision system. In this paper, we propose the FEature Decomposition and Edge Reconstruction (FEDER) model for COD. The FEDER model addresses the intrinsic similarity of foreground and background by decomposing the features into different frequency bands using learnable wavelets. It then focuses on the most informative bands to mine subtle cues that differentiate foreground and background. To achieve this, a frequency attention module and a guidance-based feature aggregation module are developed. To combat the ambiguous boundary problem, we propose to learn an auxiliary edge reconstruction task alongside the COD task. We design an ordinary differential equation-inspired edge reconstruction module that generates exact edges. By learning the auxiliary task in conjunction with the COD task, the FEDER model can generate precise prediction maps with accurate object boundaries. Experiments show that our FEDER model significantly outperforms state-of-the-art methods with cheaper computational and memory costs.*
+> **Abstract:** *Weakly-Supervised Concealed Object Segmentation (WSCOS) aims to  segment objects well blended with surrounding environments using sparsely-annotated data for model training. It remains a challenging task since (1) it is hard to distinguish concealed objects from the background due to the intrinsic similarity and (2) the sparsely-annotated training data only provide weak supervision for model learning. In this paper, we propose a new WSCOS method to address these two challenges. To tackle the intrinsic similarity challenge, we design a multi-scale feature grouping module that first groups features at different granularities and then aggregates these grouping results. By grouping similar features together, it encourages segmentation coherence, helping obtain complete segmentation results for both single and multiple-object images.   For the weak supervision challenge, we utilize the recently-proposed vision foundation model, ``\emph{Segment Anything Model (SAM)}'', and use the provided sparse annotations as prompts to generate segmentation masks, which are used to train the model. To alleviate the impact of low-quality segmentation masks, we further propose a series of strategies, including multi-augmentation result ensemble, entropy-based pixel-level weighting, and entropy-based image-level selection. These strategies help provide more reliable supervision to train the segmentation model. We verify the effectiveness of our method on various WSCOS tasks, and experiments demonstrate that our method achieves state-of-the-art performance on these tasks.*
 >
 > <p align="center">
-> <img width="800" src="Framework.jpg">
+> <img width="1000" src="Framework.jpg">
 > </p>
 ---
 
@@ -23,9 +23,36 @@
 
 ### 2. Downloading Training and Testing Datasets
 
-- Download the [training pseudo mask](https://pan.baidu.com/s/1OXQdRLhP3kond_vWWQLVIQ?pwd=6666), where the extraction code is 6666. We provide all pseudo masks to ensure completeness. Feel free to filter out those low-quality masks in the training phase.
+- Download the [training pseudo mask](https://pan.baidu.com/s/1OXQdRLhP3kond_vWWQLVIQ?pwd=6666) generated by our WS-SAM, where the extraction code is 6666. We provide all pseudo masks to ensure completeness. Feel free to filter out those low-quality masks in the training phase.
 
 - You can find useful training and testing datasets in [this repository](https://github.com/ChunmingHe/awesome-concealed-object-segmentation).
+
+
+
+
+### 3. Training Configuration
+
+- The pretrained model is stored in [Google Drive](https://drive.google.com/file/d/1OmE2vEegPPTB1JZpj2SPA6BQnXqiuD1U/view?usp=share_link). After downloading, please change the file path in the corresponding code.
+```bash
+python Train.py  --epoch 160  --lr 1e-4  --batchsize 36  --trainsize 36  --train_root YOUR_TRAININGSETPATH  --val_root  YOUR_VALIDATIONSETPATH  --save_path YOUR_CHECKPOINTPATH
+```
+
+### 4. Testing Configuration
+
+Our well-trained model is stored in [Baidu Yun](https://pan.baidu.com/s/1WkRpCccqGNXK647EUDNNJQ?pwd=6666). After downloading, please change the file path in the corresponding code.
+```bash
+python Test.py  --testsize YOUR_IMAGESIZE  --pth_path YOUR_CHECKPOINTPATH  --test_dataset_path  YOUR_TESTINGSETPATH
+```
+
+### 5. Evaluation
+
+- Matlab code: One-key evaluation is written in [MATLAB code](https://github.com/DengPingFan/CODToolbox), please follow this the instructions in `main.m` and just run it to generate the evaluation results.
+
+### 6. Results download
+
+The prediction results of our WS-SAM are stored on [Baidu Yun](https://pan.baidu.com/s/1osvAanBj8cfWx836zVyfrw?pwd=6666) please check.
+
+
 
 
 
@@ -34,8 +61,11 @@
 
 [Camouflaged object detection with feature decomposition and edge reconstruction](https://github.com/ChunmingHe/FEDER), NeurIPS 2023.
 
+[Segment Anything](https://github.com/facebookresearch/segment-anything), ICCV 2023.
+
 [Concealed Object Detection](https://github.com/GewelsJI/SINet-V2), TPAMI 2022.
 
+You can see more related papers in [Awesome-COS](https://github.com/ChunmingHe/awesome-concealed-object-segmentation).
 
 ## 📎 Citation
 
